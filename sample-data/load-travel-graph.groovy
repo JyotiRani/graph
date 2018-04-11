@@ -9,7 +9,7 @@ conf.setProperty("gremlin.tinkergraph.edgeIdManager","LONG")
 graph = TinkerGraph.open(conf)
 
 // Change the path below to point to wherever you put the graphml file
-graph.io(graphml()).readGraph('C:/Users/IBM_ADMIN/Desktop/Graphdb/work/travel-process.graphml')
+graph.io(graphml()).readGraph('https://github.com/JyotiRani/graph/tree/master/sample-data/travel-process.graphml')
 
 g=graph.traversal()
 :set max-iteration 1000     
