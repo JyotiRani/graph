@@ -1,0 +1,541 @@
+<?xml version='1.0' ?>
+<!-- ******************************************************************************* -->
+<!-- Sample file containing selected air routes between selected airports.           -->
+<!-- Intended for learning purposes only and not for travel planning!                -->
+<!--                                                                                 -->
+<!-- Author: Kelvin R. Lawrence.                                                     -->
+<!-- Graph version : 0.77 , 2017-Oct-06                                              -->
+<!--                                                                                 -->
+<!-- Please send details of errors in the graph or suggestions to:                   -->
+<!-- e-mail: klawrenc@us.ibm.com , twitter: @gfxman                                  -->
+<!--                                                                                 -->
+<!-- PLEASE NOTE:                                                                    -->
+<!-- The data in this graph is all available in the public domain but assembling it  -->
+<!-- all took considerable work! While I have tried to make the data as accurate     -->
+<!-- as possiblle I am sure errors remain. This data is intended as a learning aid   -->
+<!-- only and not for any commercial use.                                            -->
+<!--                                                                                 -->
+<!-- Significant amounts of my own research has gone into into the creation of this  -->
+<!-- graph. Aviation has always been a hobby of mine and this has been an            -->
+<!-- interesting spare time project. I have tried to error check and curate the      -->
+<!-- data which was a really big job but there are almost certainly still errors in  -->
+<!-- here. I have also been working at adding more recently announced routes and     -->
+<!-- this graph remains a work in progress as time permits.                          -->
+<!--                                                                                 -->
+<!-- Given that airlines are adding many routes on a weekly basis across the globe   -->
+<!-- a static graph such as this one will always be out of date the day it is        -->
+<!-- released! Thankfully new airports open less often and I hope I am more or less  -->
+<!-- including the majority of airports that have scheduled airline service.         -->
+<!--                                                                                 -->
+<!-- I do not include many airports without commercial passenger service as it is    -->
+<!-- passenger routes that I am most interested in. I also decided for now not to    -->
+<!-- include seaplane bases or heliports in the graph even if they offer             -->
+<!-- scheduled passenger service. Airports that are classified as only supporting    -->
+<!-- general aviation (private planes) and cargo are not included in the graph.      -->
+<!-- However, You will find some airports with no flights. This is mainly caused by  -->
+<!-- those airports having had commercial service at some prior time and I decided   -->
+<!-- to leave them in the graph in case one day in the future, service resumes.      -->
+<!--                                                                                 -->
+<!-- This graph only models airports and routes it does not attempt to model airlines-->
+<!-- or route frequency. For example, the graph can tell you that there is a route   -->
+<!-- between LHR and JFK that at least one airline operates but not which airlines   -->
+<!-- fly that route nor how many times a day the route is operated. That is an       -->
+<!-- exercise for another day and for a bigger graph! The graph also does not        -->
+<!-- currently contain any aircraft information.  For the most part I have only      -->
+<!-- included scheduled flights flown by commercial airlines. I have included a few  -->
+<!-- unusual routes such as the flights from RAF Brize Norton to RAF Ascension Island-->
+<!-- continuing on to Mount Pleasant in the Falkland Islands as I believe this       -->
+<!-- represents a significant route and is a sort of pseudo-scheduled flight. I do   -->
+<!-- not include routes flown only by freight carriers like FedEx and UPS. I also    -->
+<!-- have only mostly included airports with at least one route. There are a few     -->
+<!-- exceptions such as St. Helena which is a new airport with service pending, but  -->
+<!-- delayed, due to issues with wind shear. Where an airport has no flights but     -->
+<!-- remains in the graph it is probably because it was served by commercial airlines-->
+<!-- at some point. It is also useful for people learning to search graphs to be able-->
+<!-- to query for orphan nodes so for that reason as well I have left them in the    -->
+<!-- graph.                                                                          -->
+<!--                                                                                 -->
+<!-- All of this said, I believe, as a learning tool there is plenty in the graph to -->
+<!-- facilitate writing some interesting queries and if you are so inclined for      -->
+<!-- producing nice visuals. I hope people have as much fun playing with the graph   -->
+<!-- as I have had putting it together.                                              -->
+<!--                                                                                 -->
+<!-- Route distances were calculated using a standard Haversine Great Circle formula.-->
+<!-- This file is built using Ruby scripts that process all the collected data that  -->
+<!-- I have amassed!                                                                 -->
+<!--                                                                                 -->
+<!-- The graph has a simple schema as you will see from the GraphML markup below.    -->
+<!--                                                                                 -->
+<!-- There are four basic node types:                                                -->
+<!-- 1. Airport   - Contains properties like code (eg DFW), city, lat, lon etc.      -->
+<!-- 2. Country   - A convenient way to find all airports in a specific country.     -->
+<!-- 3. Continent - As above but for continents.                                     -->
+<!-- 4. Version   - A single stand alone node used to version the graph.             -->
+<!--                                                                                 -->
+<!-- There are two edge types:                                                       -->
+<!-- 1. Route    - Represents link between two airports with the distance in Great   -->
+<!--               Circle miles as a property.                                       -->
+<!-- 2. Contains - Connects countries and continents with airports.                  -->
+<!--                                                                                 -->
+<!-- This version of the graph contains 46 airports and 1326 routes.              -->
+<!--                                                                                 -->
+<!-- ******************************************************************************* -->
+<graphml xmlns='http://graphml.graphdrawing.org/xmlns'>
+  <key id='desc'  	for='node' attr.name='desc'    attr.type='string'></key>  
+  <key id='ans'  	for='edge' attr.name='ans'    attr.type='string'></key>
+  <key id='labelV'  for='node' attr.name='labelV'  attr.type='string'></key>
+  <key id='labelE'  for='edge' attr.name='labelE'  attr.type='string'></key>
+
+  <graph id='travelv1' edgedefault='directed'>
+  <node id='0'>
+    <data key='labelV'>version</data>
+    <data key='type'>version</data>
+    <data key='code'>0.77</data>
+    <data key='desc'>Version: 0.77 Generated: 2017-10-06 16:24:52 UTC
+Graph created by Kelvin R. Lawrence
+Please let me know of any errors you find in the graph.</data>
+  </node>
+  <node id='1'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the travel type?</data>
+  </node>
+  <node id='2'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the purpose of the travel?</data>
+  </node>
+  <node id='3'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What kind of travel restriction applied to it?</data>
+  </node>
+  <node id='4'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is this travel billable?</data>
+  </node>
+  <node id='5'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the estimated cost of this travel?</data>
+  </node>
+  <node id='6'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is there a WW approval for this travel?</data>
+  </node>
+  <node id='7'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Any local skills exist for this purpose?</data>
+  </node>
+  <node id='8'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is this customer strategic?</data>
+  </node>
+  <node id='9'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is there any PMR?</data>
+  </node>
+  <node id='10'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the severity of the PMR?</data>
+  </node>
+  <node id='11'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Any sales connect associated with it?</data>
+  </node>
+  <node id='12'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What are the customer sentiments?</data>
+  </node>
+  <node id='13'>
+    <data key='labelV'>question</data>
+    <data key='desc'>How many people are travelling?</data>
+  </node>
+  <node id='14'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the role of the person?</data>
+  </node>
+  <node id='15'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is this is the first visit? else what visit number is this?</data>
+  </node>
+  <node id='16'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the revenue impact?</data>
+  </node>
+  <node id='17'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the deal closure duration?</data>
+  </node>
+  <node id='18'>
+    <data key='labelV'>question</data>
+    <data key='desc'>What is the conference flag?</data>
+  </node>
+  <node id='19'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Person travelling is speaker at conference?</data>
+  </node>
+  <node id='20'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is there a training?</data>
+  </node>
+  <node id='21'>
+    <data key='labelV'>question</data>
+    <data key='desc'>How many audience is expected?</data>
+  </node>
+  <node id='22'>
+    <data key='labelV'>question</data>
+    <data key='desc'>Is audience a decision maker</data>
+  </node>
+  <node id='23'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Approve</data>
+  </node>
+  <node id='24'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Reject</data>
+  </node>
+  <node id='25'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Get WW approval first</data>
+  </node>
+  <node id='26'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Use local skills</data>
+  </node>
+  <node id='27'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Get opportunity Id</data>
+  </node>
+  <node id='28'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Postpone</data>
+  </node>
+  <node id='29'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Reduce Cost</data>
+  </node>
+  <node id='30'>
+    <data key='labelV'>recommendation</data>
+    <data key='desc'>Get PMR ID</data>
+  </node>  
+  <edge id='47' source='1' target='2'>
+	<data key='labelE'>answer</data>   
+    <data key='ans'>Cust</data>    
+  </edge>
+  <edge id='48' source='1' target='2'>
+	<data key='labelE'>answer</data>
+    <data key='ans'>Non-Cust</data>    
+  </edge>
+  <edge id='49' source='2' target='4'>
+    <data key='ans'>Deal</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='50' source='2' target='4'>
+    <data key='ans'>PMR</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='51' source='2' target='4'>
+    <data key='ans'>Conf</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='52' source='2' target='4'>
+    <data key='ans'>Training</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='53' source='4' target='23'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='54' source='4' target='3'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='55' source='3' target='8'>
+    <data key='ans'>WW</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='56' source='3' target='5'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='57' source='3' target='5'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='58' source='3' target='6'>
+    <data key='ans'>WW</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='59' source='3' target='8'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='60' source='3' target='8'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='61' source='3' target='7'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='62' source='3' target='7'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='63' source='5' target='7'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='64' source='5' target='8'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='65' source='5' target='7'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='66' source='5' target='8'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='67' source='5' target='18'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='69' source='5' target='18'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='71' source='6' target='23'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='72' source='6' target='25'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='73' source='7' target='8'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='74' source='7' target='8'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='75' source='8' target='9'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='76' source='8' target='10'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='77' source='8' target='11'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='78' source='8' target='9'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='79' source='8' target='10'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='80' source='8' target='11'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='180' source='8' target='12'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='81' source='9' target='10'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='82' source='9' target='13'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='83' source='10' target='12'>
+    <data key='ans'>1</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='84' source='10' target='13'>
+    <data key='ans'>1</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='183' source='10' target='12'>
+    <data key='ans'>2</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='184' source='10' target='13'>
+    <data key='ans'>2</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='85' source='10' target='13'>
+    <data key='ans'>3</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='86' source='11' target='27'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='87' source='11' target='12'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='88' source='11' target='13'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='89' source='12' target='13'>
+    <data key='ans'>Positive</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='90' source='12' target='13'>
+    <data key='ans'>Negative</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='190' source='12' target='16'>
+    <data key='ans'>Negative</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='91' source='12' target='13'>
+    <data key='ans'>Neutral</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='92' source='13' target='14'>
+    <data key='ans'>1</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='93' source='13' target='14'>
+    <data key='ans'>2</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='94' source='13' target='14'>
+    <data key='ans'>3</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='95' source='14' target='16'>
+    <data key='ans'>Critical</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='96' source='14' target='16'>
+    <data key='ans'>Important</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='97' source='16' target='17'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='197' source='16' target='23'>
+    <data key='ans'>High</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='98' source='16' target='17'>
+    <data key='ans'>Low</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='99' source='17' target='23'>
+    <data key='ans'>Next Q</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='199' source='17' target='24'>
+    <data key='ans'>Next Q</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='299' source='17' target='29'>
+    <data key='ans'>Next Q</data>
+    <data key='labelE'>answer</data>
+  </edge>  
+  <edge id='300' source='17' target='24'>
+    <data key='ans'>Long term</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='301' source='17' target='29'>
+    <data key='ans'>Long term</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='201' source='17' target='26'>
+    <data key='ans'>Long term</data>
+    <data key='labelE'>answer</data>
+  </edge>
+
+  <edge id='202' source='17' target='23'>
+    <data key='ans'>Next 9 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='203' source='17' target='24'>
+    <data key='ans'>Next 9 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='204' source='17' target='26'>
+    <data key='ans'>Next 9 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='205' source='17' target='28'>
+    <data key='ans'>Next 9 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+
+  <edge id='206' source='17' target='23'>
+    <data key='ans'>Next 6 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='207' source='17' target='28'>
+    <data key='ans'>Next 6 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+    <edge id='208' source='17' target='26'>
+    <data key='ans'>Next 6 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+    <edge id='209' source='17' target='25'>
+    <data key='ans'>Next 6 months</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='103' source='18' target='19'>
+    <data key='ans'>No</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='104' source='18' target='19'>
+    <data key='ans'>Repute</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='105' source='19' target='21'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='106' source='19' target='21'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='107' source='20' target='23'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='108' source='20' target='24'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='109' source='20' target='24'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='110' source='21' target='22'>
+    <data key='ans'>Large</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='111' source='21' target='22'>
+    <data key='ans'>Small</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='112' source='22' target='23'>
+    <data key='ans'>Y</data>
+    <data key='labelE'>answer</data>
+  </edge>
+  <edge id='113' source='22' target='24'>
+    <data key='ans'>N</data>
+    <data key='labelE'>answer</data>
+  </edge>
+</graph>
+</graphml>
