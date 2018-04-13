@@ -81,7 +81,8 @@
 <!--                                                                                 -->
 <!-- ******************************************************************************* -->
 <graphml xmlns='http://graphml.graphdrawing.org/xmlns'>
-  <key id='desc'  	for='node' attr.name='desc'    attr.type='string'></key>  
+  <key id='desc'  	for='node' attr.name='desc'    attr.type='string'></key>
+  <key id='code'  	for='node' attr.name='code'    attr.type='string'></key>  
   <key id='ans'  	for='edge' attr.name='ans'    attr.type='string'></key>
   <key id='labelV'  for='node' attr.name='labelV'  attr.type='string'></key>
   <key id='labelE'  for='edge' attr.name='labelE'  attr.type='string'></key>
@@ -98,94 +99,116 @@ Please let me know of any errors you find in the graph.</data>
   <node id='1'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the travel type?</data>
+	<data key='code'>TRAVEL_TYPE</data>
   </node>
   <node id='2'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the purpose of the travel?</data>
+	<data key='code'>TRAVEL_PURPOSE</data>
   </node>
   <node id='3'>
     <data key='labelV'>question</data>
     <data key='desc'>What kind of travel restriction applied to it?</data>
+	<data key='code'>TRAVEL_RESTRICTION</data>
   </node>
   <node id='4'>
     <data key='labelV'>question</data>
     <data key='desc'>Is this travel billable?</data>
+	<data key='code'>BILLABLE</data>
   </node>
   <node id='5'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the estimated cost of this travel?</data>
+	<data key='code'>EST_COST</data>
   </node>
   <node id='6'>
     <data key='labelV'>question</data>
     <data key='desc'>Is there a WW approval for this travel?</data>
+	<data key='code'>WW_APPROVAL</data>
   </node>
   <node id='7'>
     <data key='labelV'>question</data>
     <data key='desc'>Any local skills exist for this purpose?</data>
+	<data key='code'>LOCAL_SKILLS</data>
   </node>
   <node id='8'>
     <data key='labelV'>question</data>
     <data key='desc'>Is this customer strategic?</data>
+	<data key='code'>CUST_STRATEGIC</data>
   </node>
   <node id='9'>
     <data key='labelV'>question</data>
     <data key='desc'>Is there any PMR?</data>
+	<data key='code'>PMR</data>
   </node>
   <node id='10'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the severity of the PMR?</data>
+	<data key='code'>PMR_SEV</data>
   </node>
   <node id='11'>
     <data key='labelV'>question</data>
     <data key='desc'>Any sales connect associated with it?</data>
+	<data key='code'>SALES_CONNECT</data>
   </node>
   <node id='12'>
     <data key='labelV'>question</data>
     <data key='desc'>What are the customer sentiments?</data>
+	<data key='code'>CUST_SENTIMENT</data>
   </node>
   <node id='13'>
     <data key='labelV'>question</data>
     <data key='desc'>How many people are travelling?</data>
+	<data key='code'>NUM_PEOPLE</data>
   </node>
   <node id='14'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the role of the person?</data>
+	<data key='code'>PERSON_ROLE</data>
   </node>
   <node id='15'>
     <data key='labelV'>question</data>
     <data key='desc'>Is this is the first visit? else what visit number is this?</data>
+	<data key='code'>VISIT_NUM</data>
   </node>
   <node id='16'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the revenue impact?</data>
+	<data key='code'>REV_IMPACT</data>
   </node>
   <node id='17'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the deal closure duration?</data>
+	<data key='code'>DEAL_CLOSURE_TIME</data>
   </node>
   <node id='18'>
     <data key='labelV'>question</data>
     <data key='desc'>What is the conference flag?</data>
+	<data key='code'>CONF_FLAG</data>
   </node>
   <node id='19'>
     <data key='labelV'>question</data>
     <data key='desc'>Person travelling is speaker at conference?</data>
+	<data key='code'>SPEAKER</data>
   </node>
   <node id='20'>
     <data key='labelV'>question</data>
     <data key='desc'>Is there a training?</data>
+	<data key='code'>TRAINING</data>
   </node>
   <node id='21'>
     <data key='labelV'>question</data>
     <data key='desc'>How many audience is expected?</data>
+	<data key='code'>TRAINING_AUD</data>
   </node>
   <node id='22'>
     <data key='labelV'>question</data>
     <data key='desc'>Is audience a decision maker</data>
+	<data key='code'>AUD_DEC_MAKER</data>
   </node>
   <node id='23'>
     <data key='labelV'>recommendation</data>
-    <data key='desc'>Approve</data>
+    <data key='desc'>Approve</data>	
   </node>
   <node id='24'>
     <data key='labelV'>recommendation</data>
@@ -215,7 +238,7 @@ Please let me know of any errors you find in the graph.</data>
     <data key='labelV'>recommendation</data>
     <data key='desc'>Get PMR ID</data>
   </node>  
-  <edge id='47' source='1' target='2'>
+  <edge id='47' source='1' target='4'>
 	<data key='labelE'>answer</data>   
     <data key='ans'>Cust</data>    
   </edge>
@@ -223,19 +246,19 @@ Please let me know of any errors you find in the graph.</data>
 	<data key='labelE'>answer</data>
     <data key='ans'>Non-Cust</data>    
   </edge>
-  <edge id='49' source='2' target='4'>
+  <edge id='49' source='2' target='3'>
     <data key='ans'>Deal</data>
     <data key='labelE'>answer</data>
   </edge>
-  <edge id='50' source='2' target='4'>
+  <edge id='50' source='2' target='3'>
     <data key='ans'>PMR</data>
     <data key='labelE'>answer</data>
   </edge>
-  <edge id='51' source='2' target='4'>
+  <edge id='51' source='2' target='3'>
     <data key='ans'>Conf</data>
     <data key='labelE'>answer</data>
   </edge>
-  <edge id='52' source='2' target='4'>
+  <edge id='52' source='2' target='3'>
     <data key='ans'>Training</data>
     <data key='labelE'>answer</data>
   </edge>
@@ -243,12 +266,8 @@ Please let me know of any errors you find in the graph.</data>
     <data key='ans'>Y</data>
     <data key='labelE'>answer</data>
   </edge>
-  <edge id='54' source='4' target='3'>
+  <edge id='54' source='4' target='2'>
     <data key='ans'>N</data>
-    <data key='labelE'>answer</data>
-  </edge>
-  <edge id='55' source='3' target='8'>
-    <data key='ans'>WW</data>
     <data key='labelE'>answer</data>
   </edge>
   <edge id='56' source='3' target='5'>
@@ -307,7 +326,7 @@ Please let me know of any errors you find in the graph.</data>
     <data key='ans'>Y</data>
     <data key='labelE'>answer</data>
   </edge>
-  <edge id='72' source='6' target='25'>
+  <edge id='72' source='6' target='8'>
     <data key='ans'>N</data>
     <data key='labelE'>answer</data>
   </edge>
@@ -345,7 +364,8 @@ Please let me know of any errors you find in the graph.</data>
   </edge>
   <edge id='180' source='8' target='12'>
     <data key='ans'>High</data>
-    <data key='labelE'>answer</data>
+	<data key='route'>WW_APPROVAL</data>
+    <data key='labelE'>answer</data>	
   </edge>
   <edge id='81' source='9' target='10'>
     <data key='ans'>Y</data>
@@ -397,6 +417,7 @@ Please let me know of any errors you find in the graph.</data>
   </edge>
   <edge id='190' source='12' target='16'>
     <data key='ans'>Negative</data>
+	<data key='route'>WW_APPROVAL</data>
     <data key='labelE'>answer</data>
   </edge>
   <edge id='91' source='12' target='13'>
@@ -429,6 +450,7 @@ Please let me know of any errors you find in the graph.</data>
   </edge>
   <edge id='197' source='16' target='23'>
     <data key='ans'>High</data>
+	<data key='route'>WW_APPROVAL</data>
     <data key='labelE'>answer</data>
   </edge>
   <edge id='98' source='16' target='17'>
